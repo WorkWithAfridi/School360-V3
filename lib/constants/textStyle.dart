@@ -21,7 +21,7 @@ TextStyle headerTS = GoogleFonts.getFont(
 TextStyle parmanentMarker = GoogleFonts.getFont(
   'Permanent Marker',
   textStyle: TextStyle(
-    color: secondaryColor,
-    fontSize: 16,
+    color: secondaryColor.withOpacity(.7),
+    fontSize: 25,
   ),
 );

@@ -53,10 +53,22 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Lottie.asset('assets/lottie/paper-plant-loading.json',
                       fit: BoxFit.fitWidth),
                 ),
-                Text(
-                  'SCHOOL360',
-                  style: headerTS,
-                )
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "SCHOOL",
+                      style: headerTS,
+                    ),
+                    Text(
+                      "360",
+                      style: parmanentMarker.copyWith(
+                          fontSize: 23,
+                          color: secondaryColor.withOpacity(.7)),
+                    ),
+                  ],
+                ),
               ],
             ),
           )

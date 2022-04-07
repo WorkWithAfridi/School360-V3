@@ -36,13 +36,13 @@ class getCustomTextFieldWithIcon extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: secondaryColor,
+              color: secondaryColor.withOpacity(.5),
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide(
-              color: secondaryColor,
+              color: secondaryColor.withOpacity(.5),
             ),
           ),
         ),

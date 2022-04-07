@@ -1,8 +1,6 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:school360/constants/colors.dart';
 import 'package:school360/constants/dimentions.dart';
 import 'package:school360/routes/routes.dart';
@@ -10,13 +8,22 @@ import 'package:school360/widgets/customTextField.dart';
 
 import '../constants/textStyle.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController userIdTextEditingController = TextEditingController();
+
   TextEditingController schoolIdTextEditingController = TextEditingController();
+
   TextEditingController passwordIdTextEditingController =
       TextEditingController();
+
+  bool rememberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,8 @@ class LoginScreen extends StatelessWidget {
               left: 0,
               right: 0,
               child: Container(
-                height: 400,
+                // height: 400,
+                height: Get.height - Get.height * .45,
                 width: double.infinity,
                 child: Image.asset(
                   'assets/backdrop_images/backdropOne.jpg',
@@ -38,13 +46,13 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
               child: Column(
                 children: [
                   SizedBox(
                     height: Get.height * .25,
                   ),
                   Container(
+                    height: 480,
                     width: double.infinity,
                     color: scaffoldBackgroundColor,
                     child: Column(
@@ -67,9 +75,21 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        Text(
-                          "SCHOOL360",
-                          style: headerTS.copyWith(fontSize: 35),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "SCHOOL",
+                              style: headerTS,
+                            ),
+                            Text(
+                              "360",
+                              style: parmanentMarker.copyWith(
+                                  fontSize: 23,
+                                  color: secondaryColor.withOpacity(.7)),
+                            ),
+                          ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -137,8 +157,32 @@ class LoginScreen extends StatelessWidget {
                             isObscure: true,
                           ),
                         ),
-                        SizedBox(
-                          height: 8,
+                        Container(
+                          height: 40,
+                          padding: EdgeInsets.symmetric(horizontal: 35),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                child: Checkbox(
+                                    value: rememberMe,
+                                    activeColor: primaryColor,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        rememberMe = value!;
+                                      });
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Remember me",
+                                style: defaultTS,
+                              ),
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 35),
@@ -151,7 +195,7 @@ class LoginScreen extends StatelessWidget {
                               width: Get.width,
                               decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: secondaryColor,
+                                    color: secondaryColor.withOpacity(.5),
                                     width: 1,
                                   ),
                                   borderRadius: getBorderRadius(),
@@ -160,11 +204,10 @@ class LoginScreen extends StatelessWidget {
                                 child: Text(
                                   'Login',
                                   style: headerTS.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: scaffoldBackgroundColor,
-                                      letterSpacing: 1
-                                  ),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: scaffoldBackgroundColor,
+                                      letterSpacing: 1),
                                 ),
                               ),
                             ),
@@ -214,11 +257,11 @@ class LoginScreen extends StatelessWidget {
                               width: Get.width,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: secondaryColor,
+                                  color: secondaryColor.withOpacity(.5),
                                   width: 1,
                                 ),
                                 borderRadius: getBorderRadius(),
-                                color: primaryColor,
+                                color: Color(0xffB6E2D3),
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -226,11 +269,9 @@ class LoginScreen extends StatelessWidget {
                                   Text(
                                     'Sign in with ID',
                                     style: headerTS.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: scaffoldBackgroundColor,
-                                      letterSpacing: 1
-                                    ),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        letterSpacing: 1),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -238,7 +279,7 @@ class LoginScreen extends StatelessWidget {
                                   Icon(
                                     FontAwesomeIcons.idCard,
                                     size: 18,
-                                    color: scaffoldBackgroundColor,
+                                    color: secondaryColor,
                                   )
                                 ],
                               ),
