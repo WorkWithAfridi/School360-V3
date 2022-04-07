@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import '../../constants/colors.dart';
 import '../../constants/dimentions.dart';
 import '../../constants/textStyle.dart';
+import '../../functions/randomColor.dart';
 import '../../routes/routes.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -350,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 200,
                         width: Get.width * .6,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Colors.white.withOpacity(.7),
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: secondaryColor.withOpacity(.2),
@@ -360,7 +361,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           children: [
                             Flexible(
-                              flex: 2,
+                              flex: 3,
                               child: Container(
                                 height: double.infinity,
                                 width: double.infinity,
@@ -394,7 +395,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Text(
                                         "Temp - some important announcement",
                                         style: defaultTS.copyWith(
-                                          fontWeight: FontWeight.w600,
+                                          color: secondaryColor.withOpacity(.8),
                                         ),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
@@ -404,8 +405,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 40,
                                       child: Icon(
                                         FontAwesomeIcons.cloudArrowDown,
-                                        color: primaryColor,
-                                        size: 15,
+                                        color: getRandomColor(),
+                                        size: 16,
                                       ),
                                     )
                                   ],
@@ -479,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         SizedBox(height: 8),
         Container(
-          height: 100,
+          height: 80,
           width: Get.width,
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -496,7 +497,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 220,
                       margin: EdgeInsets.only(left: 15),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.white.withOpacity(.7),
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
                           color: secondaryColor.withOpacity(.2),
