@@ -5,8 +5,9 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:school360/constants/colors.dart';
 import 'package:school360/constants/dimentions.dart';
+import 'package:school360/routes/routes.dart';
 
-import '../constants/textStyle.dart';
+import '../../constants/textStyle.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,29 +18,50 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedPageIndex = 0;
+  String selectedFilter = "All Topic";
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          height: Get.height,
-          width: Get.width,
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                getAppBar(),
-                getFilter(),
-                getAnnouncementTab(),
-                getPastPaymentTab(),
-                getClassPerformanceTab(),
-                getCopyrightTag()
-              ],
+        body: Stack(
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              color:
+                  Theme.of(context).colorScheme.onBackground.withOpacity(0.05),
+              child: SizedBox(
+                height: double.infinity,
+                width: double.infinity,
+                child: GridPaper(
+                  color: secondaryColor.withOpacity(0.08),
+                  divisions: 4,
+                  interval: 500,
+                  subdivisions: 8,
+                ),
+              ),
             ),
-          ),
+            Container(
+              height: Get.height,
+              width: Get.width,
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    getAppBar(),
+                    getFilter(),
+                    getAnnouncementTab(),
+                    getPastPaymentTab(),
+                    getClassPerformanceTab(),
+                    getCopyrightTag()
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
         bottomNavigationBar: getCustomBottomNavigationBar(),
       ),
@@ -391,29 +413,31 @@ class _HomeScreenState extends State<HomeScreen> {
             backColor: Color(0xffDB1F48),
           ),
           FlipBarItem(
-              icon: Icon(
-                FontAwesomeIcons.creditCard,
-                size: 20,
-                color: secondaryColor,
-              ),
-              text: Text(
-                "Payment",
-                style: defaultTS.copyWith(fontSize: 10),
-              ),
-              frontColor: Color(0xffF2C5E0),
-              backColor: Color(0xffD43790)),
+            icon: Icon(
+              FontAwesomeIcons.clipboardUser,
+              size: 20,
+              color: secondaryColor,
+            ),
+            text: Text(
+              "Attendance",
+              style: defaultTS.copyWith(fontSize: 10),
+            ),
+            frontColor: Color(0xffF2C5E0),
+            backColor: Color(0xffD43790),
+          ),
           FlipBarItem(
-              icon: Icon(
-                FontAwesomeIcons.userAstronaut,
-                size: 20,
-                color: secondaryColor,
-              ),
-              text: Text(
-                "Profile",
-                style: defaultTS.copyWith(fontSize: 10),
-              ),
-              frontColor: Colors.pink,
-              backColor: Colors.amber),
+            icon: Icon(
+              FontAwesomeIcons.creditCard,
+              size: 20,
+              color: secondaryColor,
+            ),
+            text: Text(
+              "Payment",
+              style: defaultTS.copyWith(fontSize: 10),
+            ),
+            frontColor: Colors.pink,
+            backColor: Colors.amber,
+          ),
         ],
         onIndexChanged: (pageIndex) {
           setState(() {
@@ -498,43 +522,61 @@ class _HomeScreenState extends State<HomeScreen> {
                                   margin: EdgeInsets.only(
                                       top: 5, bottom: 5, right: 5, left: 3),
                                   child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'ID:',
-                                        style: defaultTS.copyWith(
-                                          color: secondaryColor.withOpacity(.6),
-                                          fontSize: 10,
-                                        ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'ID:',
+                                            style: defaultTS.copyWith(
+                                              color: secondaryColor
+                                                  .withOpacity(.6),
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Some title - abc xyz 123',
+                                            style: defaultTS.copyWith(
+                                              color: secondaryColor
+                                                  .withOpacity(.9),
+                                              fontSize: 14,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        'Some title - abc xyz 123',
-                                        style: defaultTS.copyWith(
-                                          color: secondaryColor.withOpacity(.9),
-                                          fontSize: 14,
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        'Paid on:',
-                                        style: defaultTS.copyWith(
-                                          color: secondaryColor.withOpacity(.6),
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                      Text(
-                                        '12/12/12',
-                                        style: defaultTS.copyWith(
-                                          color: secondaryColor.withOpacity(.5),
-                                          fontSize: 13,
-                                        ),
-                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Paid on:',
+                                            style: defaultTS.copyWith(
+                                              color: secondaryColor
+                                                  .withOpacity(.6),
+                                              fontSize: 10,
+                                            ),
+                                          ),
+                                          Text(
+                                            '12/12/12',
+                                            style: defaultTS.copyWith(
+                                              color: secondaryColor
+                                                  .withOpacity(.9),
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                     ],
                                   ),
                                 ),
@@ -737,67 +779,205 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               width: 20,
             ),
-            Container(
-              height: 35,
-              padding: getGlobalPadding(),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: getBorderRadius(),
-                gradient: LinearGradient(
-                  colors: [
-                    primaryColor.withOpacity(.7),
-                    primaryColor.withOpacity(.8),
-                    primaryColor.withOpacity(.9),
-                    primaryColor
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: primaryColor.withOpacity(.7),
-                    blurRadius: 10,
-                    offset: Offset(
-                      0.0,
-                      4,
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedFilter = "All Topic";
+                });
+              },
+              child: selectedFilter == "All Topic"
+                  ? Container(
+                      height: 35,
+                      padding: getGlobalPadding(),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: getBorderRadius(),
+                        gradient: LinearGradient(
+                          colors: [
+                            primaryColor.withOpacity(.7),
+                            primaryColor.withOpacity(.8),
+                            primaryColor.withOpacity(.9),
+                            primaryColor
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryColor.withOpacity(.7),
+                            blurRadius: 10,
+                            offset: Offset(
+                              0.0,
+                              4,
+                            ),
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        'All Topic',
+                        style: defaultTS.copyWith(color: Colors.white),
+                      ),
+                    )
+                  : Text(
+                      "All Topic",
+                      style: defaultTS.copyWith(
+                        color: secondaryColor.withOpacity(.2),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  )
-                ],
-              ),
-              child: Text(
-                'All Topic',
-                style: defaultTS.copyWith(color: Colors.white),
-              ),
             ),
             SizedBox(
               width: 25,
             ),
-            Text(
-              "Announcements",
-              style: defaultTS.copyWith(
-                color: secondaryColor.withOpacity(.2),
-                fontWeight: FontWeight.bold,
-              ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedFilter = "Announcements";
+                });
+              },
+              child: selectedFilter == "Announcements"
+                  ? Container(
+                      height: 35,
+                      padding: getGlobalPadding(),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: getBorderRadius(),
+                        gradient: LinearGradient(
+                          colors: [
+                            primaryColor.withOpacity(.7),
+                            primaryColor.withOpacity(.8),
+                            primaryColor.withOpacity(.9),
+                            primaryColor
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryColor.withOpacity(.7),
+                            blurRadius: 10,
+                            offset: Offset(
+                              0.0,
+                              4,
+                            ),
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        'Announcements',
+                        style: defaultTS.copyWith(color: Colors.white),
+                      ),
+                    )
+                  : Text(
+                      "Announcements",
+                      style: defaultTS.copyWith(
+                        color: secondaryColor.withOpacity(.2),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ),
             SizedBox(
               width: 25,
             ),
-            Text(
-              "Attendance",
-              style: defaultTS.copyWith(
-                color: secondaryColor.withOpacity(.2),
-                fontWeight: FontWeight.bold,
-              ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedFilter = "Attendance";
+                });
+              },
+              child: selectedFilter == "Attendance"
+                  ? Container(
+                      height: 35,
+                      padding: getGlobalPadding(),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: getBorderRadius(),
+                        gradient: LinearGradient(
+                          colors: [
+                            primaryColor.withOpacity(.7),
+                            primaryColor.withOpacity(.8),
+                            primaryColor.withOpacity(.9),
+                            primaryColor
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primaryColor.withOpacity(.7),
+                            blurRadius: 10,
+                            offset: Offset(
+                              0.0,
+                              4,
+                            ),
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        'Attendance',
+                        style: defaultTS.copyWith(color: Colors.white),
+                      ),
+                    )
+                  : Text(
+                      "Attendance",
+                      style: defaultTS.copyWith(
+                        color: secondaryColor.withOpacity(.2),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
             ),
             SizedBox(
               width: 25,
             ),
-            Text(
-              "Bills",
-              style: defaultTS.copyWith(
-                color: secondaryColor.withOpacity(.2),
-                fontWeight: FontWeight.bold,
+            InkWell(
+              onTap: () {
+                setState(() {
+                  selectedFilter = "Bills";
+                });
+              },
+              child: selectedFilter == "Bills"
+                  ? Container(
+                height: 35,
+                padding: getGlobalPadding(),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: getBorderRadius(),
+                  gradient: LinearGradient(
+                    colors: [
+                      primaryColor.withOpacity(.7),
+                      primaryColor.withOpacity(.8),
+                      primaryColor.withOpacity(.9),
+                      primaryColor
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: primaryColor.withOpacity(.7),
+                      blurRadius: 10,
+                      offset: Offset(
+                        0.0,
+                        4,
+                      ),
+                    )
+                  ],
+                ),
+                child: Text(
+                  'Bills',
+                  style: defaultTS.copyWith(color: Colors.white),
+                ),
+              )
+                  : Text(
+                "Bills",
+                style: defaultTS.copyWith(
+                  color: secondaryColor.withOpacity(.2),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             SizedBox(
@@ -844,7 +1024,32 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          Icon(FontAwesomeIcons.solidBell),
+          Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.getAnnouncementScreenRoute);
+                },
+                child: Icon(
+                  FontAwesomeIcons.solidBell,
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.getProfileScreenRoute);
+                },
+                child: Icon(
+                  FontAwesomeIcons.userAstronaut,
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+            ],
+          ),
         ],
       ),
     );

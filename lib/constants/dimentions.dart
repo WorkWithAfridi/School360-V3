@@ -5,5 +5,5 @@ getGlobalPadding() {
 }
 
 getBorderRadius() {
-  return BorderRadius.circular(15);
+  return BorderRadius.circular(5);
 }

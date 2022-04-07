@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:school360/constants/textStyle.dart';
 import 'package:school360/routes/routes.dart';
+
+import '../constants/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -20,8 +24,43 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('SplashScreen'),
+      body: Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.05),
+            child: SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: GridPaper(
+                color: secondaryColor.withOpacity(0.08),
+                divisions: 4,
+                interval: 800,
+                subdivisions: 8,
+              ),
+            ),
+          ),
+          Container(
+            height: Get.height,
+            width: Get.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 80,
+                  width: 150,
+                  child: Lottie.asset('assets/lottie/paper-plant-loading.json',
+                      fit: BoxFit.fitWidth),
+                ),
+                Text(
+                  'SCHOOL360',
+                  style: headerTS,
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

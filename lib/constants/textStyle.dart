@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:school360/constants/colors.dart';
 
 TextStyle defaultTS = GoogleFonts.getFont(
-  'Roboto',
+  'Ubuntu Condensed',
   textStyle: TextStyle(
     color: secondaryColor,
     fontSize: 15,
@@ -15,5 +15,13 @@ TextStyle headerTS = GoogleFonts.getFont(
   textStyle: TextStyle(
     color: secondaryColor,
     fontSize: 25,
+  ),
+);
+
+TextStyle parmanentMarker = GoogleFonts.getFont(
+  'Permanent Marker',
+  textStyle: TextStyle(
+    color: secondaryColor,
+    fontSize: 16,
   ),
 );

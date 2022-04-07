@@ -18,6 +18,10 @@ class School360 extends StatelessWidget {
       getPages: Routes.routes,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: scaffoldBackgroundColor,
+        primaryColor: primaryColor,
+        appBarTheme: AppBarTheme(
+          color: primaryColor,
+        ),
       ),
     );
   }

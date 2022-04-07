@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:school360/constants/colors.dart';
 import 'package:school360/constants/dimentions.dart';
+import 'package:school360/routes/routes.dart';
 import 'package:school360/widgets/customTextField.dart';
 
 import '../constants/textStyle.dart';
@@ -20,120 +22,259 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          height: Get.height,
-          width: Get.width,
-          margin: getGlobalPadding(),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 40,
+        body: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: 400,
+                width: double.infinity,
+                child: Image.asset(
+                  'assets/backdrop_images/backdropOne.jpg',
+                  fit: BoxFit.fitWidth,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RotatedBox(
-                      quarterTurns: 1,
-                      child: Text(
-                        "SCHOOL360",
-                        style: headerTS.copyWith(fontSize: 35),
-                      ),
-                    ),
-                    Column(
+              ),
+            ),
+            SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: Get.height * .25,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    color: scaffoldBackgroundColor,
+                    child: Column(
                       children: [
                         SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Lottie.asset(
-                            'assets/lottie/tiger.json',
-                            fit: BoxFit.cover,
-                            repeat: false,
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                  color: secondaryColor,
+                                  borderRadius: getBorderRadius()),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "SCHOOL360",
+                          style: headerTS.copyWith(fontSize: 35),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '• Empowering ',
+                              style: defaultTS.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              '• Education ',
+                              style: defaultTS.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              '• Everyday ',
+                              style: defaultTS.copyWith(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          "Sign in",
+                          style: headerTS.copyWith(fontSize: 20),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 35),
+                          child: getCustomTextFieldWithIcon(
+                            textEditingController:
+                                schoolIdTextEditingController,
+                            labelText: "Enter school id",
+                            icon: FontAwesomeIcons.school,
                           ),
                         ),
                         SizedBox(
-                          height: 30,
-                          child: AnimatedTextKit(
-                            repeatForever: true,
-                            animatedTexts: [
-                              FlickerAnimatedText(
-                                'Empowering',
-                                textStyle: headerTS.copyWith(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              FlickerAnimatedText(
-                                'Education',
-                                textStyle: headerTS.copyWith(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              FlickerAnimatedText(
-                                "Everyday.",
-                                textStyle: headerTS.copyWith(
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ],
-                            onTap: () {
-                              print("Tap Event");
-                            },
+                          height: 8,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 35),
+                          child: getCustomTextFieldWithIcon(
+                            textEditingController: userIdTextEditingController,
+                            labelText: "Enter student id",
+                            icon: FontAwesomeIcons.userAstronaut,
                           ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 35),
+                          child: getCustomTextFieldWithIcon(
+                            textEditingController:
+                                passwordIdTextEditingController,
+                            labelText: "Enter password",
+                            icon: FontAwesomeIcons.lock,
+                            isObscure: true,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 35),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(Routes.getHomeScreenRoute);
+                            },
+                            child: Container(
+                              height: 45,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: secondaryColor,
+                                    width: 1,
+                                  ),
+                                  borderRadius: getBorderRadius(),
+                                  color: primaryColor),
+                              child: Center(
+                                child: Text(
+                                  'Login',
+                                  style: headerTS.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: scaffoldBackgroundColor,
+                                      letterSpacing: 1
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     Container(
+                        //       width: 40,
+                        //       height: .5,
+                        //       decoration: BoxDecoration(
+                        //           color: secondaryColor,
+                        //           borderRadius: getBorderRadius()),
+                        //     ),
+                        //     Text(
+                        //       ' Or ',
+                        //       style: defaultTS.copyWith(
+                        //         color: secondaryColor.withOpacity(.5),
+                        //       ),
+                        //     ),
+                        //     Container(
+                        //       width: 40,
+                        //       height: .5,
+                        //       decoration: BoxDecoration(
+                        //           color: secondaryColor,
+                        //           borderRadius: getBorderRadius()),
+                        //     )
+                        //   ],
+                        // ),
+                        // SizedBox(
+                        //   height: 5,
+                        // ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 35),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(
+                                Routes.getQrScannercreenRoute,
+                              );
+                            },
+                            child: Container(
+                              height: 45,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: secondaryColor,
+                                  width: 1,
+                                ),
+                                borderRadius: getBorderRadius(),
+                                color: primaryColor,
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Sign in with ID',
+                                    style: headerTS.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: scaffoldBackgroundColor,
+                                      letterSpacing: 1
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Icon(
+                                    FontAwesomeIcons.idCard,
+                                    size: 18,
+                                    color: scaffoldBackgroundColor,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Forgot your password? ",
+                              style: defaultTS.copyWith(fontSize: 13),
+                            ),
+                            Text(
+                              "Get help logging in.",
+                              style: defaultTS.copyWith(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
                         ),
                       ],
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "Sign Up.",
-                  style: headerTS,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                getCustomTextFieldWithIcon(
-                  textEditingController: schoolIdTextEditingController,
-                  labelText: "Enter School ID",
-                  icon: FontAwesomeIcons.school,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                getCustomTextFieldWithIcon(
-                  textEditingController: userIdTextEditingController,
-                  labelText: "Enter User ID",
-                  icon: FontAwesomeIcons.school,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                getCustomTextFieldWithIcon(
-                  textEditingController: passwordIdTextEditingController,
-                  labelText: "Enter Password",
-                  icon: FontAwesomeIcons.school,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 60,
-                  color: Colors.red,
-                  child: Center(
-                    child: Text(
-                      "Login",
-                      style: defaultTS,
-                    ),
                   ),
-                )
-              ],
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
