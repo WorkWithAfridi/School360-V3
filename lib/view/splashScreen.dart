@@ -59,12 +59,12 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Text(
                       "SCHOOL",
-                      style: headerTS,
+                      style: headerTS.copyWith(fontSize: 18),
                     ),
                     Text(
                       "360",
                       style: parmanentMarker.copyWith(
-                          fontSize: 23,
+                          fontSize: 18,
                           color: secondaryColor.withOpacity(.7)),
                     ),
                   ],

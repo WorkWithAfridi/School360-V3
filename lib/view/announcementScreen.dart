@@ -106,7 +106,8 @@ class AnnouncementScreen extends StatelessWidget {
                                         ),
                                         child: Text(
                                           (index + 1).toString(),
-                                          style: headerTS.copyWith(fontSize: 16),
+                                          style:
+                                              headerTS.copyWith(fontSize: 16),
                                         ),
                                       ),
                                       SizedBox(
@@ -121,14 +122,30 @@ class AnnouncementScreen extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 10.0),
-                                          child: Text(
-                                            'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.',
-                                            style: defaultTS.copyWith(
-                                              color: secondaryColor
-                                                  .withOpacity(.8),
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.',
+                                                style: defaultTS.copyWith(
+                                                  color: secondaryColor
+                                                      .withOpacity(.8),
+                                                ),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              Text(
+                                                '12/12/12',
+                                                style: defaultTS.copyWith(
+                                                  color: secondaryColor
+                                                      .withOpacity(.6),
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),

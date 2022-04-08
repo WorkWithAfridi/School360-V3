@@ -9,7 +9,7 @@ List<Color> listOfColors = [
   Colors.orange,
   Colors.yellow,
   Colors.blue,
-  Colors.black,
+  Colors.cyan,
   Colors.red,
   Colors.deepOrange,
   Color(0xffF2C5E0),

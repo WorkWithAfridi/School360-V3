@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -344,6 +346,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
+                  itemCount: 5,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(left: 10),
@@ -361,7 +364,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           children: [
                             Flexible(
-                              flex: 3,
+                              flex: 5,
                               child: Container(
                                 height: double.infinity,
                                 width: double.infinity,
@@ -374,15 +377,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(15),
                                       topRight: Radius.circular(15)),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1512314889357-e157c22f938d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80',
+                                  child: Lottie.asset(
+                                    'assets/lottie/announcement${5 - index}.json',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
                             ),
                             Flexible(
-                              flex: 1,
+                              flex: 2,
                               child: Container(
                                 width: double.infinity,
                                 margin: EdgeInsets.symmetric(
@@ -392,13 +395,44 @@ class _HomeScreenState extends State<HomeScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                      child: Text(
-                                        "Temp - some important announcement",
-                                        style: defaultTS.copyWith(
-                                          color: secondaryColor.withOpacity(.8),
-                                        ),
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "Temp - some important announcement",
+                                            style: defaultTS.copyWith(
+                                              color: secondaryColor
+                                                  .withOpacity(.9),
+                                              fontSize: 14,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                FontAwesomeIcons.clock,
+                                                size: 15,
+                                                color: secondaryColor
+                                                    .withOpacity(.6),
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                '12/12/12',
+                                                style: defaultTS.copyWith(
+                                                  color: secondaryColor
+                                                      .withOpacity(.6),
+                                                  fontSize: 11,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                       ),
                                     ),
                                     SizedBox(
@@ -418,7 +452,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
-                  itemCount: 3,
                 ),
                 SizedBox(
                   width: 10,
@@ -491,6 +524,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 5,
                 ),
                 ListView.builder(
+                  itemCount: 5,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Container(
                       height: 90,
@@ -512,15 +549,23 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: double.infinity,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
-                                color: Colors.pink,
+                                color: getRandomColor(),
                               ),
                               width: 70,
                               margin: EdgeInsets.all(5),
-                              child: Center(
-                                child: Text(
-                                  index.toString(),
-                                  style: headerTS.copyWith(fontSize: 30),
-                                ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "TK:",
+                                    style: headerTS.copyWith(fontSize: 13),
+                                  ),
+                                  Text(
+                                    Random().nextInt(10000).toString(),
+                                    style: headerTS.copyWith(fontSize: 13),
+                                  ),
+                                ],
                               ),
                             ),
                             Expanded(
@@ -591,10 +636,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
-                  itemCount: 3,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
                 ),
                 SizedBox(
                   width: 10,
