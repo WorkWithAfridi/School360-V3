@@ -46,6 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: Get.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   height: 80,
@@ -64,8 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     Text(
                       "360",
                       style: parmanentMarker.copyWith(
-                          fontSize: 18,
-                          color: secondaryColor.withOpacity(.7)),
+                          fontSize: 18, color: secondaryColor.withOpacity(.7)),
                     ),
                   ],
                 ),
@@ -80,5 +80,5 @@ class _SplashScreenState extends State<SplashScreen> {
 
 void triggerSplashScreen() async {
   await Future.delayed(Duration(seconds: 3));
-  Get.toNamed(Routes.getLoginScreenRoute);
+  Get.offNamed(Routes.getLoginScreenRoute);
 }

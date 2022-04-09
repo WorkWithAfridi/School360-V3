@@ -12,6 +12,7 @@ List<Color> listOfColors = [
   Colors.cyan,
   Colors.red,
   Colors.deepOrange,
+  Color(0xff10BBEF),
   Color(0xffF2C5E0),
   Color(0xffD43790),
   Color(0xffDB1F48),

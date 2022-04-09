@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:school360/widgets/announcement.dart';
+import 'package:school360/widgets/classPerformance.dart';
+import 'package:school360/widgets/pastpayment.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/dimentions.dart';
@@ -348,109 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: BouncingScrollPhysics(),
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Container(
-                        height: 200,
-                        width: Get.width * .6,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(.7),
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: secondaryColor.withOpacity(.2),
-                            width: 1,
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            Flexible(
-                              flex: 5,
-                              child: Container(
-                                height: double.infinity,
-                                width: double.infinity,
-                                margin: const EdgeInsets.only(
-                                  top: 8,
-                                  left: 8,
-                                  right: 8,
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15)),
-                                  child: Lottie.asset(
-                                    'assets/lottie/announcement${5 - index}.json',
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              flex: 2,
-                              child: Container(
-                                width: double.infinity,
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "Temp - some important announcement",
-                                            style: defaultTS.copyWith(
-                                              color: secondaryColor
-                                                  .withOpacity(.9),
-                                              fontSize: 14,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                FontAwesomeIcons.clock,
-                                                size: 15,
-                                                color: secondaryColor
-                                                    .withOpacity(.6),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              Text(
-                                                '12/12/12',
-                                                style: defaultTS.copyWith(
-                                                  color: secondaryColor
-                                                      .withOpacity(.6),
-                                                  fontSize: 11,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 40,
-                                      child: Icon(
-                                        FontAwesomeIcons.cloudArrowDown,
-                                        color: getRandomColor(),
-                                        size: 16,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
+                    return GetAnnouncement(index: index);
                   },
                 ),
                 SizedBox(
@@ -529,112 +430,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 90,
-                      width: 220,
-                      margin: EdgeInsets.only(left: 15),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(.7),
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: secondaryColor.withOpacity(.2),
-                          width: 1,
-                        ),
-                      ),
-                      padding: EdgeInsets.all(3),
-                      child: Container(
-                        child: Row(
-                          children: [
-                            Container(
-                              height: double.infinity,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: getRandomColor(),
-                              ),
-                              width: 70,
-                              margin: EdgeInsets.all(5),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "TK:",
-                                    style: headerTS.copyWith(fontSize: 13),
-                                  ),
-                                  Text(
-                                    Random().nextInt(10000).toString(),
-                                    style: headerTS.copyWith(fontSize: 13),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    top: 5, bottom: 5, right: 5, left: 3),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'ID:',
-                                          style: defaultTS.copyWith(
-                                            color:
-                                                secondaryColor.withOpacity(.6),
-                                            fontSize: 10,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Some title - abc xyz 123',
-                                          style: defaultTS.copyWith(
-                                            color:
-                                                secondaryColor.withOpacity(.9),
-                                            fontSize: 14,
-                                          ),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Paid on:',
-                                          style: defaultTS.copyWith(
-                                            color:
-                                                secondaryColor.withOpacity(.6),
-                                            fontSize: 10,
-                                          ),
-                                        ),
-                                        Text(
-                                          '12/12/12',
-                                          style: defaultTS.copyWith(
-                                            color:
-                                                secondaryColor.withOpacity(.9),
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
+                    return GetPastPayment(index: index);
                   },
                 ),
                 SizedBox(
@@ -695,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Column getClassPerformanceTab() {
+  Widget getClassPerformanceTab() {
     return Column(
       children: [
         SizedBox(
@@ -716,279 +512,324 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: 10,
         ),
-        Container(
-          height: 300,
-          width: Get.width,
-          child: ListView(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            physics: BouncingScrollPhysics(),
+        SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Row(
             children: [
               Container(
-                height: 250,
-                width: 200,
-                margin: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: Color(0xff9AA0FC),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: secondaryColor.withOpacity(.2),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        margin: getGlobalPadding(),
-                        child: Lottie.asset(
-                          'assets/lottie/boy-studying-globe.json',
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: getGlobalPadding(),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Total Classes',
-                              style: defaultTS.copyWith(color: Colors.white),
-                            ),
-                            Text(
-                              '10',
-                              style: headerTS.copyWith(
-                                  color: Colors.white, fontSize: 30),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 250,
-                width: 200,
-                margin: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: Color(0xffF8EFE4),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: secondaryColor.withOpacity(.2),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        margin: getGlobalPadding(),
-                        child: Lottie.asset(
-                          'assets/lottie/classroom.json',
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: getGlobalPadding(),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Total Presents',
-                              style: defaultTS.copyWith(color: secondaryColor),
-                            ),
-                            Text(
-                              '8',
-                              style: headerTS.copyWith(
-                                  color: secondaryColor, fontSize: 30),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 250,
-                width: 200,
-                margin: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: Color(0xffACEEF3),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: secondaryColor.withOpacity(.2),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        margin: getGlobalPadding(),
-                        child: Lottie.asset(
-                          'assets/lottie/online-classes.json',
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: getGlobalPadding(),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Total Absents',
-                              style: defaultTS.copyWith(
-                                color: secondaryColor,
-                              ),
-                            ),
-                            Text(
-                              '1',
-                              style: headerTS.copyWith(
-                                  color: secondaryColor, fontSize: 30),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 250,
-                width: 200,
-                margin: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: Color(0xffFDB750),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: secondaryColor.withOpacity(.2),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        margin: getGlobalPadding(),
-                        child: Lottie.asset(
-                          'assets/lottie/holiday.json',
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: getGlobalPadding(),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Holidays',
-                              style: defaultTS.copyWith(color: Colors.white),
-                            ),
-                            Text(
-                              '1',
-                              style: headerTS.copyWith(
-                                  color: Colors.white, fontSize: 30),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                height: 250,
-                width: 200,
-                margin: EdgeInsets.only(left: 20),
-                decoration: BoxDecoration(
-                  color: Color(0xffA06AB4),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(
-                    color: secondaryColor.withOpacity(.2),
-                    width: 1,
-                  ),
-                ),
-                child: Column(
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        margin: getGlobalPadding(),
-                        child: Lottie.asset(
-                          'assets/lottie/busy.json',
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        margin: getGlobalPadding(),
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'On Leave',
-                              style: defaultTS.copyWith(color: secondaryColor),
-                            ),
-                            Text(
-                              '4',
-                              style: headerTS.copyWith(
-                                  color: secondaryColor, fontSize: 30),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
+                height: 300,
+                child: ListView.builder(
+                  itemCount: 5,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return GetClassPerformance(index: index);
+                  },
                 ),
               ),
               SizedBox(
-                width: 20,
+                width: 15,
               ),
             ],
           ),
         ),
       ],
     );
+    // return Column(
+    //   children: [
+    //     SizedBox(
+    //       height: 15,
+    //     ),
+    //     Padding(
+    //       padding: getGlobalPadding(),
+    //       child: Row(
+    //         mainAxisAlignment: MainAxisAlignment.start,
+    //         children: [
+    //           Text(
+    //             "Class Performance",
+    //             style: headerTS.copyWith(fontSize: 16),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //     SizedBox(
+    //       height: 10,
+    //     ),
+    //     Container(
+    //       height: 300,
+    //       width: Get.width,
+    //       child: ListView(
+    //         shrinkWrap: true,
+    //         scrollDirection: Axis.horizontal,
+    //         physics: BouncingScrollPhysics(),
+    //         children: [
+    //           Container(
+    //             height: 250,
+    //             width: 200,
+    //             margin: EdgeInsets.only(left: 20),
+    //             decoration: BoxDecoration(
+    //               color: Color(0xff9AA0FC),
+    //               borderRadius: BorderRadius.circular(15),
+    //               border: Border.all(
+    //                 color: secondaryColor.withOpacity(.2),
+    //                 width: 1,
+    //               ),
+    //             ),
+    //             child: Column(
+    //               children: [
+    //                 Flexible(
+    //                   flex: 3,
+    //                   child: Container(
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     margin: getGlobalPadding(),
+    //                     child: Lottie.asset(
+    //                       'assets/lottie/classPerformance1.json',
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 Flexible(
+    //                   flex: 1,
+    //                   child: Container(
+    //                     margin: getGlobalPadding(),
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     child: Column(
+    //                       mainAxisAlignment: MainAxisAlignment.start,
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Text(
+    //                           'Total Classes',
+    //                           style: defaultTS.copyWith(color: Colors.white),
+    //                         ),
+    //                         Text(
+    //                           '10',
+    //                           style: headerTS.copyWith(
+    //                               color: Colors.white, fontSize: 30),
+    //                         ),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //           Container(
+    //             height: 250,
+    //             width: 200,
+    //             margin: EdgeInsets.only(left: 20),
+    //             decoration: BoxDecoration(
+    //               color: Color(0xffF8EFE4),
+    //               borderRadius: BorderRadius.circular(15),
+    //               border: Border.all(
+    //                 color: secondaryColor.withOpacity(.2),
+    //                 width: 1,
+    //               ),
+    //             ),
+    //             child: Column(
+    //               children: [
+    //                 Flexible(
+    //                   flex: 3,
+    //                   child: Container(
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     margin: getGlobalPadding(),
+    //                     child: Lottie.asset(
+    //                       'assets/lottie/classPerformance2.json',
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 Flexible(
+    //                   flex: 1,
+    //                   child: Container(
+    //                     margin: getGlobalPadding(),
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     child: Column(
+    //                       mainAxisAlignment: MainAxisAlignment.start,
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Text(
+    //                           'Total Presents',
+    //                           style: defaultTS.copyWith(color: secondaryColor),
+    //                         ),
+    //                         Text(
+    //                           '8',
+    //                           style: headerTS.copyWith(
+    //                               color: secondaryColor, fontSize: 30),
+    //                         ),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //           Container(
+    //             height: 250,
+    //             width: 200,
+    //             margin: EdgeInsets.only(left: 20),
+    //             decoration: BoxDecoration(
+    //               color: Color(0xffACEEF3),
+    //               borderRadius: BorderRadius.circular(15),
+    //               border: Border.all(
+    //                 color: secondaryColor.withOpacity(.2),
+    //                 width: 1,
+    //               ),
+    //             ),
+    //             child: Column(
+    //               children: [
+    //                 Flexible(
+    //                   flex: 3,
+    //                   child: Container(
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     margin: getGlobalPadding(),
+    //                     child: Lottie.asset(
+    //                       'assets/lottie/classPerformance3.json',
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 Flexible(
+    //                   flex: 1,
+    //                   child: Container(
+    //                     margin: getGlobalPadding(),
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     child: Column(
+    //                       mainAxisAlignment: MainAxisAlignment.start,
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Text(
+    //                           'Total Absents',
+    //                           style: defaultTS.copyWith(
+    //                             color: secondaryColor,
+    //                           ),
+    //                         ),
+    //                         Text(
+    //                           '1',
+    //                           style: headerTS.copyWith(
+    //                               color: secondaryColor, fontSize: 30),
+    //                         ),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //           Container(
+    //             height: 250,
+    //             width: 200,
+    //             margin: EdgeInsets.only(left: 20),
+    //             decoration: BoxDecoration(
+    //               color: Color(0xffFDB750),
+    //               borderRadius: BorderRadius.circular(15),
+    //               border: Border.all(
+    //                 color: secondaryColor.withOpacity(.2),
+    //                 width: 1,
+    //               ),
+    //             ),
+    //             child: Column(
+    //               children: [
+    //                 Flexible(
+    //                   flex: 3,
+    //                   child: Container(
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     margin: getGlobalPadding(),
+    //                     child: Lottie.asset(
+    //                       'assets/lottie/classPerformance4.json',
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 Flexible(
+    //                   flex: 1,
+    //                   child: Container(
+    //                     margin: getGlobalPadding(),
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     child: Column(
+    //                       mainAxisAlignment: MainAxisAlignment.start,
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Text(
+    //                           'Holidays',
+    //                           style: defaultTS.copyWith(color: Colors.white),
+    //                         ),
+    //                         Text(
+    //                           '1',
+    //                           style: headerTS.copyWith(
+    //                               color: Colors.white, fontSize: 30),
+    //                         ),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //           Container(
+    //             height: 250,
+    //             width: 200,
+    //             margin: EdgeInsets.only(left: 20),
+    //             decoration: BoxDecoration(
+    //               color: Color(0xffA06AB4),
+    //               borderRadius: BorderRadius.circular(15),
+    //               border: Border.all(
+    //                 color: secondaryColor.withOpacity(.2),
+    //                 width: 1,
+    //               ),
+    //             ),
+    //             child: Column(
+    //               children: [
+    //                 Flexible(
+    //                   flex: 3,
+    //                   child: Container(
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     margin: getGlobalPadding(),
+    //                     child: Lottie.asset(
+    //                       'assets/lottie/classPerformance5.json',
+    //                     ),
+    //                   ),
+    //                 ),
+    //                 Flexible(
+    //                   flex: 1,
+    //                   child: Container(
+    //                     margin: getGlobalPadding(),
+    //                     height: double.infinity,
+    //                     width: double.infinity,
+    //                     child: Column(
+    //                       mainAxisAlignment: MainAxisAlignment.start,
+    //                       crossAxisAlignment: CrossAxisAlignment.start,
+    //                       children: [
+    //                         Text(
+    //                           'On Leave',
+    //                           style: defaultTS.copyWith(color: secondaryColor),
+    //                         ),
+    //                         Text(
+    //                           '4',
+    //                           style: headerTS.copyWith(
+    //                               color: secondaryColor, fontSize: 30),
+    //                         ),
+    //                       ],
+    //                     ),
+    //                   ),
+    //                 )
+    //               ],
+    //             ),
+    //           ),
+    //           SizedBox(
+    //             width: 20,
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 
   @override

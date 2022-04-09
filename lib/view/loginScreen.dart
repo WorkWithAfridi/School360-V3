@@ -177,9 +177,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
-                                "Remember me",
-                                style: defaultTS,
+                              InkWell(
+                                onTap: (){
+                                  setState(() {
+                                    rememberMe=!rememberMe;
+                                  });
+                                },
+                                child: Text(
+                                  "Remember me",
+                                  style: defaultTS,
+                                ),
                               ),
                             ],
                           ),
