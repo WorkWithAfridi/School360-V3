@@ -167,10 +167,11 @@ class _ClassworkScreenState extends State<ClassworkScreen> {
   Container getAppBar() {
     return Container(
       height: 50,
-      padding: getGlobalPadding(),
+      padding: EdgeInsets.only(top: 15),
+      margin: getGlobalPadding(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Classwork",
