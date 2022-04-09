@@ -20,6 +20,15 @@ class AnnouncementScreen extends StatelessWidget {
               headerTS.copyWith(fontSize: 16, color: scaffoldBackgroundColor),
         ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            FontAwesomeIcons.xmark,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Container(
         height: Get.height,

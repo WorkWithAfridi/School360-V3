@@ -63,9 +63,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     selectionColor: primaryColor,
                     toggleDaySelection: false,
                     onSelectionChanged: (x) async {
-                      setState(() {
-                        selectedDate = x.value.toString().substring(0, 10);
-                      });
+                      selectedDate = x.value.toString().substring(0, 10);
                     },
                   ),
                   isLoading
@@ -90,13 +88,13 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 15,
             ),
             Padding(
               padding: getGlobalPadding(),
               child: Text(
                 "Pick a Class",
-                style: headerTS,
+                style: headerTS.copyWith(fontSize: 16),
               ),
             ),
             SizedBox(
@@ -200,7 +198,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                             EdgeInsets.only(right: 20, top: 10, bottom: 15),
                         margin: getGlobalPadding(),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(.4),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             color: secondaryColor.withOpacity(.2),
@@ -296,13 +294,16 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         child: Text(month),
       );
 
+
+
   Container getAppBar() {
     return Container(
       height: 50,
-      padding: getGlobalPadding(),
+      padding: EdgeInsets.only(top: 15),
+      margin: getGlobalPadding(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Pick a Date",

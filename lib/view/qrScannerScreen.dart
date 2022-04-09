@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../constants/colors.dart';
@@ -13,9 +14,21 @@ class QrScannerScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "QR Scanner",
-          style: headerTS.copyWith(fontSize: 16, color: scaffoldBackgroundColor),
+          style: headerTS.copyWith(
+            fontSize: 16,
+          ),
         ),
         centerTitle: true,
+        backgroundColor: Color(0xffB6E2D3),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            FontAwesomeIcons.xmark,
+            color: Colors.black,
+          ),
+        ),
       ),
       body: Container(
         height: Get.height,

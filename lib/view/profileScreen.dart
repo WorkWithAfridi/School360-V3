@@ -35,6 +35,15 @@ class ProfileScreen extends StatelessWidget {
             width: 5,
           )
         ],
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            FontAwesomeIcons.xmark,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Container(
         height: Get.height,
