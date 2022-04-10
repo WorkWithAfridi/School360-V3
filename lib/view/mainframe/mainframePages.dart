@@ -2,19 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:school360/view/mainframe/attendanceScreen.dart';
 import 'package:school360/view/mainframe/classworkScreen.dart';
 import 'package:school360/view/mainframe/homeScreen.dart';
+import 'package:school360/view/mainframe/paymentScreen.dart';
+import 'package:school360/view/mainframe/resultScreen.dart';
 
 List<Widget> mainframePages = [
   HomeScreen(),
   ClassworkScreen(),
-  Container(
-    child: Center(
-      child: Text("Result"),
-    ),
-  ),
+  ResultScreen(),
   AttendanceScreen(),
-  Container(
-    child: Center(
-      child: Text("Payment"),
-    ),
-  ),
+  PaymentScreen(),
 ];

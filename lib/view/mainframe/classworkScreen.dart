@@ -82,43 +82,45 @@ class _ClassworkScreenState extends State<ClassworkScreen> {
                   ),
                   isLoading
                       ? Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        height: 300,
-                        width: Get.width,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(.7),
-                        ),
-                      ),
-                      Container(
-                        height: 100,
-                        child: GetLoadingAnimation(),
-                      ),
-                    ],
-                  )
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              height: 300,
+                              width: Get.width,
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(.7),
+                              ),
+                            ),
+                            Container(
+                              height: 100,
+                              child: GetLoadingAnimation(),
+                            ),
+                          ],
+                        )
                       : Container(),
                 ],
               ),
             ),
             SizedBox(
-              height: 2,
+              height: 5,
             ),
-            !showContent? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: getGlobalPadding(),
-                  child: Text(
-                    '*Please select a date to continue.',
-                    style: defaultTS.copyWith(
-                      color: secondaryColor.withOpacity(.6),
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ],
-            ) : Container(),
+            !showContent
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: getGlobalPadding(),
+                        child: Text(
+                          '*Please select a date to continue.',
+                          style: defaultTS.copyWith(
+                            color: secondaryColor.withOpacity(.6),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Container(),
             SizedBox(
               height: 8,
             ),

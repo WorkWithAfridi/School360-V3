@@ -119,11 +119,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     style: defaultTS,
                     isExpanded: false,
                     elevation: 4,
-                    value: "January",
+                    value: "Select a class",
                     items: [
-                      "January",
-                      "February",
-                      "March",
+                      "Select a class",
+                      "Class 1",
+                      "Class 2",
+                      "Class 3",
                     ].map(buildMonthMenuItem).toList(),
                     onChanged: (value) {}),
               ),
@@ -294,8 +295,6 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         child: Text(month),
       );
 
-
-
   Container getAppBar() {
     return Container(
       height: 50,
@@ -321,4 +320,5 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       ),
     );
   }
+
 }

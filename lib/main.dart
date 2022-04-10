@@ -22,6 +22,7 @@ class School360 extends StatelessWidget {
         appBarTheme: AppBarTheme(
           color: primaryColor,
         ),
+        colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.pink),
       ),
     );
   }
