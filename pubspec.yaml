@@ -42,6 +42,7 @@ dependencies:
   lottie: any
   animated_text_kit: any
   syncfusion_flutter_datepicker: any
+  qr_code_scanner: ^0.7.0
 
 dev_dependencies:
   flutter_test:
