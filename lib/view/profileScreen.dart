@@ -167,7 +167,7 @@ class ProfileScreen extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 35),
                       child: InkWell(
                         onTap: () {
-                          Get.offNamed(Routes.getLoginScreenRoute);
+                          Get.offAllNamed(Routes.getLoginScreenRoute);
                         },
                         child: Container(
                           height: 45,

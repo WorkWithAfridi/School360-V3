@@ -1,9 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
+import 'package:school360/controller/locationController.dart';
 import 'package:school360/widgets/announcement.dart';
 import 'package:school360/widgets/classPerformance.dart';
 import 'package:school360/widgets/pastpayment.dart';
@@ -11,7 +9,6 @@ import 'package:school360/widgets/pastpayment.dart';
 import '../../constants/colors.dart';
 import '../../constants/dimentions.dart';
 import '../../constants/textStyle.dart';
-import '../../functions/randomColor.dart';
 import '../../routes/routes.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,49 +19,72 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late LocationController locationController;
   String selectedFilter = "All Topic";
 
   Container getAppBar() {
     return Container(
-      height: 50,
+      height: 80,
       padding: getGlobalPadding(),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "SCHOOL",
-                style: headerTS,
+              Row(
+                children: [
+                  Text(
+                    "SCHOOL",
+                    style: headerTS,
+                  ),
+                  Text(
+                    "360",
+                    style: parmanentMarker.copyWith(
+                        fontSize: 23, color: secondaryColor.withOpacity(.7)),
+                  ),
+                ],
               ),
-              Text(
-                "360",
-                style: parmanentMarker.copyWith(
-                    fontSize: 23, color: secondaryColor.withOpacity(.7)),
+              Row(
+                children: [
+                  Icon(
+                    FontAwesomeIcons.locationDot,
+                    size: 15,
+                    color: secondaryColor,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Obx(() {
+                    return Text(
+                      locationController.location.value,
+                      style: defaultTS,
+                    );
+                  }),
+                ],
               ),
             ],
           ),
           Row(
             children: [
-              InkWell(
-                onTap: () {
+              IconButton(
+                onPressed: () {
                   Get.toNamed(Routes.getAnnouncementScreenRoute);
                 },
-                child: Icon(
+                icon: Icon(
                   FontAwesomeIcons.solidBell,
                 ),
               ),
               SizedBox(
                 width: 15,
               ),
-              InkWell(
-                onTap: () {
+              IconButton(
+                onPressed: () {
                   Get.toNamed(Routes.getProfileScreenRoute);
                 },
-                child: Icon(
+                icon: Icon(
                   FontAwesomeIcons.userAstronaut,
                 ),
               ),
@@ -537,299 +557,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ],
     );
-    // return Column(
-    //   children: [
-    //     SizedBox(
-    //       height: 15,
-    //     ),
-    //     Padding(
-    //       padding: getGlobalPadding(),
-    //       child: Row(
-    //         mainAxisAlignment: MainAxisAlignment.start,
-    //         children: [
-    //           Text(
-    //             "Class Performance",
-    //             style: headerTS.copyWith(fontSize: 16),
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //     SizedBox(
-    //       height: 10,
-    //     ),
-    //     Container(
-    //       height: 300,
-    //       width: Get.width,
-    //       child: ListView(
-    //         shrinkWrap: true,
-    //         scrollDirection: Axis.horizontal,
-    //         physics: BouncingScrollPhysics(),
-    //         children: [
-    //           Container(
-    //             height: 250,
-    //             width: 200,
-    //             margin: EdgeInsets.only(left: 20),
-    //             decoration: BoxDecoration(
-    //               color: Color(0xff9AA0FC),
-    //               borderRadius: BorderRadius.circular(15),
-    //               border: Border.all(
-    //                 color: secondaryColor.withOpacity(.2),
-    //                 width: 1,
-    //               ),
-    //             ),
-    //             child: Column(
-    //               children: [
-    //                 Flexible(
-    //                   flex: 3,
-    //                   child: Container(
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     margin: getGlobalPadding(),
-    //                     child: Lottie.asset(
-    //                       'assets/lottie/classPerformance1.json',
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Flexible(
-    //                   flex: 1,
-    //                   child: Container(
-    //                     margin: getGlobalPadding(),
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     child: Column(
-    //                       mainAxisAlignment: MainAxisAlignment.start,
-    //                       crossAxisAlignment: CrossAxisAlignment.start,
-    //                       children: [
-    //                         Text(
-    //                           'Total Classes',
-    //                           style: defaultTS.copyWith(color: Colors.white),
-    //                         ),
-    //                         Text(
-    //                           '10',
-    //                           style: headerTS.copyWith(
-    //                               color: Colors.white, fontSize: 30),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             height: 250,
-    //             width: 200,
-    //             margin: EdgeInsets.only(left: 20),
-    //             decoration: BoxDecoration(
-    //               color: Color(0xffF8EFE4),
-    //               borderRadius: BorderRadius.circular(15),
-    //               border: Border.all(
-    //                 color: secondaryColor.withOpacity(.2),
-    //                 width: 1,
-    //               ),
-    //             ),
-    //             child: Column(
-    //               children: [
-    //                 Flexible(
-    //                   flex: 3,
-    //                   child: Container(
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     margin: getGlobalPadding(),
-    //                     child: Lottie.asset(
-    //                       'assets/lottie/classPerformance2.json',
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Flexible(
-    //                   flex: 1,
-    //                   child: Container(
-    //                     margin: getGlobalPadding(),
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     child: Column(
-    //                       mainAxisAlignment: MainAxisAlignment.start,
-    //                       crossAxisAlignment: CrossAxisAlignment.start,
-    //                       children: [
-    //                         Text(
-    //                           'Total Presents',
-    //                           style: defaultTS.copyWith(color: secondaryColor),
-    //                         ),
-    //                         Text(
-    //                           '8',
-    //                           style: headerTS.copyWith(
-    //                               color: secondaryColor, fontSize: 30),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             height: 250,
-    //             width: 200,
-    //             margin: EdgeInsets.only(left: 20),
-    //             decoration: BoxDecoration(
-    //               color: Color(0xffACEEF3),
-    //               borderRadius: BorderRadius.circular(15),
-    //               border: Border.all(
-    //                 color: secondaryColor.withOpacity(.2),
-    //                 width: 1,
-    //               ),
-    //             ),
-    //             child: Column(
-    //               children: [
-    //                 Flexible(
-    //                   flex: 3,
-    //                   child: Container(
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     margin: getGlobalPadding(),
-    //                     child: Lottie.asset(
-    //                       'assets/lottie/classPerformance3.json',
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Flexible(
-    //                   flex: 1,
-    //                   child: Container(
-    //                     margin: getGlobalPadding(),
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     child: Column(
-    //                       mainAxisAlignment: MainAxisAlignment.start,
-    //                       crossAxisAlignment: CrossAxisAlignment.start,
-    //                       children: [
-    //                         Text(
-    //                           'Total Absents',
-    //                           style: defaultTS.copyWith(
-    //                             color: secondaryColor,
-    //                           ),
-    //                         ),
-    //                         Text(
-    //                           '1',
-    //                           style: headerTS.copyWith(
-    //                               color: secondaryColor, fontSize: 30),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             height: 250,
-    //             width: 200,
-    //             margin: EdgeInsets.only(left: 20),
-    //             decoration: BoxDecoration(
-    //               color: Color(0xffFDB750),
-    //               borderRadius: BorderRadius.circular(15),
-    //               border: Border.all(
-    //                 color: secondaryColor.withOpacity(.2),
-    //                 width: 1,
-    //               ),
-    //             ),
-    //             child: Column(
-    //               children: [
-    //                 Flexible(
-    //                   flex: 3,
-    //                   child: Container(
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     margin: getGlobalPadding(),
-    //                     child: Lottie.asset(
-    //                       'assets/lottie/classPerformance4.json',
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Flexible(
-    //                   flex: 1,
-    //                   child: Container(
-    //                     margin: getGlobalPadding(),
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     child: Column(
-    //                       mainAxisAlignment: MainAxisAlignment.start,
-    //                       crossAxisAlignment: CrossAxisAlignment.start,
-    //                       children: [
-    //                         Text(
-    //                           'Holidays',
-    //                           style: defaultTS.copyWith(color: Colors.white),
-    //                         ),
-    //                         Text(
-    //                           '1',
-    //                           style: headerTS.copyWith(
-    //                               color: Colors.white, fontSize: 30),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             height: 250,
-    //             width: 200,
-    //             margin: EdgeInsets.only(left: 20),
-    //             decoration: BoxDecoration(
-    //               color: Color(0xffA06AB4),
-    //               borderRadius: BorderRadius.circular(15),
-    //               border: Border.all(
-    //                 color: secondaryColor.withOpacity(.2),
-    //                 width: 1,
-    //               ),
-    //             ),
-    //             child: Column(
-    //               children: [
-    //                 Flexible(
-    //                   flex: 3,
-    //                   child: Container(
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     margin: getGlobalPadding(),
-    //                     child: Lottie.asset(
-    //                       'assets/lottie/classPerformance5.json',
-    //                     ),
-    //                   ),
-    //                 ),
-    //                 Flexible(
-    //                   flex: 1,
-    //                   child: Container(
-    //                     margin: getGlobalPadding(),
-    //                     height: double.infinity,
-    //                     width: double.infinity,
-    //                     child: Column(
-    //                       mainAxisAlignment: MainAxisAlignment.start,
-    //                       crossAxisAlignment: CrossAxisAlignment.start,
-    //                       children: [
-    //                         Text(
-    //                           'On Leave',
-    //                           style: defaultTS.copyWith(color: secondaryColor),
-    //                         ),
-    //                         Text(
-    //                           '4',
-    //                           style: headerTS.copyWith(
-    //                               color: secondaryColor, fontSize: 30),
-    //                         ),
-    //                       ],
-    //                     ),
-    //                   ),
-    //                 )
-    //               ],
-    //             ),
-    //           ),
-    //           SizedBox(
-    //             width: 20,
-    //           ),
-    //         ],
-    //       ),
-    //     ),
-    //   ],
-    // );
+  }
+
+  @override
+  void initState() {
+    locationController = Get.find();
+    super.initState();
   }
 
   @override

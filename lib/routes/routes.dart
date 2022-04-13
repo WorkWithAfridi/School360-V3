@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:school360/bindings/mainframBingings.dart';
 import 'package:school360/view/announcementScreen.dart';
 import 'package:school360/view/loginScreen.dart';
 import 'package:school360/view/profileScreen.dart';
 import 'package:school360/view/qrScannerScreen.dart';
 import 'package:school360/view/splashScreen.dart';
 
+import '../bindings/qrScannerBindings.dart';
 import '../view/mainframe/mainframe.dart';
 
 class Routes {
@@ -22,6 +24,7 @@ class Routes {
     GetPage(
       name: getHomeScreenRoute,
       transition: Transition.downToUp,
+      binding: MainframBindings(),
       page: () => Mainframe(),
     ),
     GetPage(
@@ -33,6 +36,7 @@ class Routes {
       name: getQrScannercreenRoute,
       fullscreenDialog: true,
       transition: Transition.leftToRight,
+      binding: QrScannerBindings(),
       page: () => QrScannerScreen(),
     ),
     GetPage(
