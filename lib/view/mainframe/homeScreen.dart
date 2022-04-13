@@ -77,9 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   FontAwesomeIcons.solidBell,
                 ),
               ),
-              SizedBox(
-                width: 15,
-              ),
               IconButton(
                 onPressed: () {
                   Get.toNamed(Routes.getProfileScreenRoute);

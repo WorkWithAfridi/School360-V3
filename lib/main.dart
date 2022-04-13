@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:school360/constants/colors.dart';
 import 'package:school360/routes/routes.dart';
 
-main() {
+main() async{
+  await GetStorage.init();
   runApp(const School360());
 }
 
@@ -16,6 +18,7 @@ class School360 extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.getSplashScreenRoute,
       getPages: Routes.routes,
+      smartManagement: SmartManagement.onlyBuilder,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: scaffoldBackgroundColor,
         primaryColor: primaryColor,

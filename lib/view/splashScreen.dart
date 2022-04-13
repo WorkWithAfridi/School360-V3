@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:school360/constants/textStyle.dart';
+import 'package:school360/controller/authenticationController.dart';
 import 'package:school360/routes/routes.dart';
 
 import '../constants/colors.dart';
@@ -14,11 +15,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late AuthenticationController authenticationController;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    triggerSplashScreen();
+    checkUserStatusAndThenPushToNextScreen();
   }
 
   @override
@@ -76,9 +79,17 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-}
 
-void triggerSplashScreen() async {
-  await Future.delayed(Duration(seconds: 3));
-  Get.offNamed(Routes.getLoginScreenRoute);
+  Future<void> checkUserStatusAndThenPushToNextScreen() async {
+    authenticationController = Get.find();
+    await authenticationController.checkIfUserIsLoggedIn();
+    triggerSplashScreen();
+  }
+
+  void triggerSplashScreen() async {
+    await Future.delayed(Duration(seconds: 3));
+    authenticationController.keepUserLoggedIn
+        ? Get.offNamed(Routes.getMainframeScreenRoute)
+        : Get.offNamed(Routes.getLoginScreenRoute);
+  }
 }

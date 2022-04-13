@@ -5,6 +5,6 @@ import 'package:school360/controller/locationController.dart';
 class QrScannerBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => QrController());
+    Get.put(QrController());
   }
 }

@@ -2,14 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:school360/controller/authenticationController.dart';
+import 'package:school360/widgets/buttonLoadingAnimation.dart';
 
 import '../constants/colors.dart';
 import '../constants/dimentions.dart';
 import '../constants/textStyle.dart';
 import '../routes/routes.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  late AuthenticationController authenticationController;
+  bool isLoading = false;
+  @override
+  void initState() {
+    authenticationController = Get.find();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +107,8 @@ class ProfileScreen extends StatelessWidget {
                       height: 12,
                     ),
                     Text(
-                      'Khondakar Afridi',
+                      authenticationController.user.studentInfo!.name
+                          .toString(),
                       style: headerTS.copyWith(
                         color: scaffoldBackgroundColor,
                         fontSize: 15,
@@ -109,31 +125,15 @@ class ProfileScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Student of',
+                              'Student code',
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor.withOpacity(.5),
                               ),
                             ),
                             Text(
-                              'Class X',
-                              style: defaultTS.copyWith(
-                                color: scaffoldBackgroundColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Roll no.',
-                              style: defaultTS.copyWith(
-                                color: scaffoldBackgroundColor.withOpacity(.5),
-                              ),
-                            ),
-                            Text(
-                              '123',
+                              authenticationController
+                                  .user.studentInfo!.studentCode
+                                  .toString(),
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor,
                               ),
@@ -151,7 +151,8 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              '1820461',
+                              authenticationController.user.studentInfo!.id
+                                  .toString(),
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor,
                               ),
@@ -166,8 +167,17 @@ class ProfileScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 35),
                       child: InkWell(
-                        onTap: () {
-                          Get.offAllNamed(Routes.getLoginScreenRoute);
+                        onTap: () async {
+                          setState(() {
+                            isLoading = true;
+                          });
+
+                          await Future.delayed(Duration(seconds: 2));
+                          await authenticationController.logoutUser();
+
+                          setState(() {
+                            isLoading = false;
+                          });
                         },
                         child: Container(
                           height: 45,
@@ -181,13 +191,16 @@ class ProfileScreen extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           alignment: Alignment.center,
-                          child: Text(
-                            'Sign out',
-                            style: headerTS.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                letterSpacing: 1),
-                          ),
+                          child: isLoading
+                              ? ButtonLoadingAnimation(
+                                  loadingColor: secondaryColor)
+                              : Text(
+                                  'Logout',
+                                  style: headerTS.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      letterSpacing: 1),
+                                ),
                         ),
                       ),
                     ),

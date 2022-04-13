@@ -3,7 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:school360/constants/colors.dart';
 import 'package:school360/constants/dimentions.dart';
+import 'package:school360/controller/authenticationController.dart';
+import 'package:school360/functions/randomColor.dart';
 import 'package:school360/routes/routes.dart';
+import 'package:school360/widgets/buttonLoadingAnimation.dart';
+import 'package:school360/widgets/customSnackBar.dart';
 import 'package:school360/widgets/customTextField.dart';
 
 import '../constants/textStyle.dart';
@@ -23,7 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordIdTextEditingController =
       TextEditingController();
 
-  bool rememberMe = false;
+
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    authenticationController = Get.find();
+  }
+
+  late AuthenticationController authenticationController;
 
   @override
   Widget build(BuildContext context) {
@@ -166,11 +180,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(
                                 width: 20,
                                 child: Checkbox(
-                                    value: rememberMe,
+                                    value: authenticationController.keepUserLoggedIn,
                                     activeColor: primaryColor,
                                     onChanged: (value) {
                                       setState(() {
-                                        rememberMe = value!;
+                                        authenticationController.keepUserLoggedIn = value!;
                                       });
                                     }),
                               ),
@@ -178,13 +192,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 5,
                               ),
                               InkWell(
-                                onTap: (){
+                                onTap: () {
                                   setState(() {
-                                    rememberMe=!rememberMe;
+                                    authenticationController.keepUserLoggedIn = !authenticationController.keepUserLoggedIn;
                                   });
                                 },
                                 child: Text(
-                                  "Remember me",
+                                  "Keep me logged in",
                                   style: defaultTS,
                                 ),
                               ),
@@ -194,8 +208,33 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 35),
                           child: InkWell(
-                            onTap: () {
-                              Get.toNamed(Routes.getHomeScreenRoute);
+                            onTap: () async {
+                              String userId = userIdTextEditingController.text;
+                              String password =
+                                  passwordIdTextEditingController.text;
+                              String schoolId =
+                                  schoolIdTextEditingController.text;
+                              if (userId.isNotEmpty &&
+                                  password.isNotEmpty &&
+                                  schoolId.isNotEmpty) {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                await Future.delayed(Duration(seconds: 2));
+                                await authenticationController.loginUser(
+                                  userId,
+                                  password,
+                                  schoolId,
+                                );
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              } else {
+                                showSnackbar(
+                                    title: "Authentication Error",
+                                    message:
+                                        "Credentials cannot be kept empty!");
+                              }
                             },
                             child: Container(
                               height: 45,
@@ -208,14 +247,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   borderRadius: getBorderRadius(),
                                   color: primaryColor),
                               child: Center(
-                                child: Text(
-                                  'Login',
-                                  style: headerTS.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: scaffoldBackgroundColor,
-                                      letterSpacing: 1),
-                                ),
+                                child: isLoading
+                                    ? const ButtonLoadingAnimation(loadingColor: Color(0xffB6E2D3))
+                                    : Text(
+                                        'Login',
+                                        style: headerTS.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: scaffoldBackgroundColor,
+                                            letterSpacing: 1),
+                                      ),
                               ),
                             ),
                           ),
@@ -223,34 +264,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 8,
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Container(
-                        //       width: 40,
-                        //       height: .5,
-                        //       decoration: BoxDecoration(
-                        //           color: secondaryColor,
-                        //           borderRadius: getBorderRadius()),
-                        //     ),
-                        //     Text(
-                        //       ' Or ',
-                        //       style: defaultTS.copyWith(
-                        //         color: secondaryColor.withOpacity(.5),
-                        //       ),
-                        //     ),
-                        //     Container(
-                        //       width: 40,
-                        //       height: .5,
-                        //       decoration: BoxDecoration(
-                        //           color: secondaryColor,
-                        //           borderRadius: getBorderRadius()),
-                        //     )
-                        //   ],
-                        // ),
-                        // SizedBox(
-                        //   height: 5,
-                        // ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 35),
                           child: InkWell(
@@ -293,7 +306,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-
                         SizedBox(
                           height: 8,
                         ),

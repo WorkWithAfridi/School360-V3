@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:school360/bindings/authenticationBindings.dart';
 import 'package:school360/bindings/mainframBingings.dart';
 import 'package:school360/view/announcementScreen.dart';
 import 'package:school360/view/loginScreen.dart';
@@ -11,7 +12,7 @@ import '../view/mainframe/mainframe.dart';
 
 class Routes {
   static get getSplashScreenRoute => '/';
-  static get getHomeScreenRoute => '/mainframe';
+  static get getMainframeScreenRoute => '/mainframe';
   static get getLoginScreenRoute => '/loginscreen';
   static get getQrScannercreenRoute => '/qrScannerScreen';
   static get getAnnouncementScreenRoute => '/announcementScreen';
@@ -19,12 +20,17 @@ class Routes {
   static List<GetPage> routes = [
     GetPage(
       name: getSplashScreenRoute,
+      bindings: [
+        AuthenticationBindings(),
+      ],
       page: () => SplashScreen(),
     ),
     GetPage(
-      name: getHomeScreenRoute,
+      name: getMainframeScreenRoute,
       transition: Transition.downToUp,
-      binding: MainframBindings(),
+      bindings: [
+        MainframBindings(),
+      ],
       page: () => Mainframe(),
     ),
     GetPage(
@@ -36,7 +42,9 @@ class Routes {
       name: getQrScannercreenRoute,
       fullscreenDialog: true,
       transition: Transition.leftToRight,
-      binding: QrScannerBindings(),
+      bindings: [
+        QrScannerBindings(),
+      ],
       page: () => QrScannerScreen(),
     ),
     GetPage(
