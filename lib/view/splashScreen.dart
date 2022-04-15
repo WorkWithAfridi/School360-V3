@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void triggerSplashScreen() async {
     await Future.delayed(Duration(seconds: 3));
     authenticationController.keepUserLoggedIn
-        ? Get.offNamed(Routes.getMainframeScreenRoute)
-        : Get.offNamed(Routes.getLoginScreenRoute);
+        ? Get.offAllNamed(Routes.getMainframeScreenRoute)
+        : Get.offAllNamed(Routes.getLoginScreenRoute);
   }
 }

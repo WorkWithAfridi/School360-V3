@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:school360/controller/authenticationController.dart';
+import 'package:school360/controller/userController.dart';
 import 'package:school360/widgets/buttonLoadingAnimation.dart';
 
 import '../constants/colors.dart';
@@ -18,10 +19,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late UserController userController;
   late AuthenticationController authenticationController;
   bool isLoading = false;
   @override
   void initState() {
+    userController = Get.find();
     authenticationController = Get.find();
     super.initState();
   }
@@ -107,8 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       height: 12,
                     ),
                     Text(
-                      authenticationController.user.studentInfo!.name
-                          .toString(),
+                      userController.user.value.name.toString(),
                       style: headerTS.copyWith(
                         color: scaffoldBackgroundColor,
                         fontSize: 15,
@@ -125,15 +127,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Student code',
+                              'Student ID',
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor.withOpacity(.5),
                               ),
                             ),
                             Text(
-                              authenticationController
-                                  .user.studentInfo!.studentCode
-                                  .toString(),
+                              userController.user.value.studentId.toString(),
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor,
                               ),
@@ -145,14 +145,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              'Student id',
+                              'School ID',
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor.withOpacity(.5),
                               ),
                             ),
                             Text(
-                              authenticationController.user.studentInfo!.id
-                                  .toString(),
+                              userController.user.value.schoolId.toString(),
                               style: defaultTS.copyWith(
                                 color: scaffoldBackgroundColor,
                               ),

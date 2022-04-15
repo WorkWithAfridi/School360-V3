@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:school360/controller/authenticationController.dart';
 import 'package:school360/controller/qrController.dart';
 import 'package:school360/widgets/qrScanner.dart';
 
@@ -23,11 +24,13 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    qrController=Get.find();
+    qrController = Get.find();
+    authenticationController = Get.find();
     super.initState();
   }
 
   late QrController qrController;
+  late AuthenticationController authenticationController;
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +112,8 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
               left: 0,
               right: 0,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +144,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                     ],
                   ),
                   SizedBox(
-                    height: Get.height * .05,
+                    height: Get.height * .03,
                   ),
                 ],
               ),
@@ -151,7 +156,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: Get.height * .07,
+                    height: Get.height * .04,
                   ),
                   Padding(
                     padding: getGlobalPadding(),
@@ -161,6 +166,42 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                         color: secondaryColor.withOpacity(.6),
                         fontSize: 12,
                       ),
+                    ),
+                  ),
+                  Container(
+                    height: 40,
+                    padding: EdgeInsets.symmetric(horizontal: 35),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 20,
+                          child: Checkbox(
+                              value: authenticationController.keepUserLoggedIn,
+                              activeColor: primaryColor,
+                              onChanged: (value) {
+                                setState(() {
+                                  authenticationController.keepUserLoggedIn =
+                                  value!;
+                                });
+                              }),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              authenticationController.keepUserLoggedIn =
+                              !authenticationController.keepUserLoggedIn;
+                            });
+                          },
+                          child: Text(
+                            "Keep me logged in",
+                            style: defaultTS,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

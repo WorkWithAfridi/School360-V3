@@ -8,4 +8,6 @@ class QrController extends GetxController {
   Barcode? result;
 
   QRViewController? controller;
+
+  bool willScan = true;
 }
