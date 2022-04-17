@@ -177,14 +177,16 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                         SizedBox(
                           width: 20,
                           child: Checkbox(
-                              value: authenticationController.keepUserLoggedIn,
-                              activeColor: primaryColor,
-                              onChanged: (value) {
-                                setState(() {
-                                  authenticationController.keepUserLoggedIn =
-                                  value!;
-                                });
-                              }),
+                            value: authenticationController.keepUserLoggedIn,
+                            activeColor: Color(0xffB6E2D3),
+                            onChanged: (value) {
+                              setState(() {
+                                authenticationController.keepUserLoggedIn =
+                                    value!;
+                              });
+                            },
+                            checkColor: secondaryColor,
+                          ),
                         ),
                         SizedBox(
                           width: 5,
@@ -193,7 +195,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
                           onTap: () {
                             setState(() {
                               authenticationController.keepUserLoggedIn =
-                              !authenticationController.keepUserLoggedIn;
+                                  !authenticationController.keepUserLoggedIn;
                             });
                           },
                           child: Text(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:school360/controller/locationController.dart';
+import 'package:school360/controller/noticeController.dart';
+import 'package:school360/controller/userController.dart';
 import 'package:school360/widgets/announcement.dart';
+import 'package:school360/widgets/buttonLoadingAnimation.dart';
 import 'package:school360/widgets/classPerformance.dart';
 import 'package:school360/widgets/pastpayment.dart';
 
@@ -20,12 +24,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late LocationController locationController;
+  late NoticeController noticeController;
+  late UserController userController;
   String selectedFilter = "All Topic";
+  bool isLoading = true;
 
   Container getAppBar() {
     return Container(
       height: 80,
-      padding: getGlobalPadding(),
+      padding: EdgeInsets.only(left: 20, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -366,30 +373,51 @@ class _HomeScreenState extends State<HomeScreen> {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   physics: BouncingScrollPhysics(),
-                  itemCount: 5,
+                  itemCount: noticeController
+                              .noticeModelFromApiResponse.value.data!.length >
+                          5
+                      ? 5
+                      : noticeController
+                          .noticeModelFromApiResponse.value.data!.length,
                   itemBuilder: (context, index) {
-                    return GetAnnouncement(index: index);
+                    return noticeController.noticeModelFromApiResponse.value
+                                .data!.length ==
+                            0
+                        ? Text(
+                            "Stand by for updates...",
+                            style: defaultTS.copyWith(
+                              color: secondaryColor.withOpacity(.6),
+                              fontSize: 11,
+                            ),
+                          )
+                        : GetAnnouncement(index: index);
                   },
                 ),
                 SizedBox(
                   width: 10,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.arrowRight,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      "See more",
-                      style: defaultTS.copyWith(
-                          fontSize: 10, color: secondaryColor.withOpacity(.5)),
-                    )
-                  ],
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.getAnnouncementScreenRoute);
+                  },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        FontAwesomeIcons.arrowRight,
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "See more",
+                        style: defaultTS.copyWith(
+                            fontSize: 10,
+                            color: secondaryColor.withOpacity(.5)),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   width: 12,
@@ -559,29 +587,49 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     locationController = Get.find();
+    noticeController = Get.find();
+    userController = Get.find();
     super.initState();
+    getData();
+  }
+
+  getData() async {
+    bool noticeFetchSuccess = await noticeController.getNotice(
+        userController.user.value.schoolId, 0.toString());
+    if (noticeFetchSuccess) {
+      await Future.delayed(Duration(seconds: 2));
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: Get.height,
-      width: Get.width,
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            getAppBar(),
-            getFilter(),
-            getAnnouncementTab(),
-            getPastPaymentTab(),
-            getClassPerformanceTab(),
-            getCopyrightTag()
-          ],
-        ),
-      ),
-    );
+    return isLoading
+        ? Center(
+            child: CustomLoadingAnimation(
+              loadingColor: primaryColor,
+            ),
+          )
+        : SizedBox(
+            height: Get.height,
+            width: Get.width,
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  getAppBar(),
+                  getFilter(),
+                  getAnnouncementTab(),
+                  getPastPaymentTab(),
+                  getClassPerformanceTab(),
+                  getCopyrightTag()
+                ],
+              ),
+            ),
+          );
   }
 }

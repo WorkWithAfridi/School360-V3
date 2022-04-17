@@ -5,7 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:school360/constants/API.dart';
 import 'package:school360/controller/userController.dart';
-import 'package:school360/model/DecodedUserFromQrApiResponse.dart';
+import 'package:school360/model/UserFromQrApiResponse.dart';
 import 'package:school360/model/User.dart';
 import 'package:school360/model/UserFromLoginApiResponse.dart';
 
@@ -106,8 +106,8 @@ class AuthenticationController extends GetxController {
     if (responseData.contains("<!DOCTYPE html>")) return false;
     var decodedJson = jsonDecode(responseData);
     if (decodedJson["status"] != "error") {
-      DecodedUserFromQrApiResponse decodedUserFromQrApiResponse =
-          DecodedUserFromQrApiResponse.fromJson(decodedJson);
+      UserFromQrApiResponse decodedUserFromQrApiResponse =
+          UserFromQrApiResponse.fromJson(decodedJson);
       userController.user.value = User.name(
         name: decodedUserFromQrApiResponse.studentInfo!.name.toString(),
         schoolId: schoolId,

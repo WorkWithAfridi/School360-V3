@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class ButtonLoadingAnimation extends StatelessWidget {
+class CustomLoadingAnimation extends StatelessWidget {
   final Color loadingColor;
-  const ButtonLoadingAnimation({Key? key, required this.loadingColor})
+  const CustomLoadingAnimation({Key? key, required this.loadingColor})
       : super(key: key);
 
   @override

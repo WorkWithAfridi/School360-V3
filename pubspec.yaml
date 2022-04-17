@@ -47,6 +47,9 @@ dependencies:
   geolocator: any
   geocoding: any
   http: any
+  dio: ^4.0.4
+  path_provider: ^2.0.7
+  open_file: ^3.2.1
 
 dev_dependencies:
   flutter_test:

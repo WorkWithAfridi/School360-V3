@@ -191,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           alignment: Alignment.center,
                           child: isLoading
-                              ? ButtonLoadingAnimation(
+                              ? CustomLoadingAnimation(
                                   loadingColor: secondaryColor)
                               : Text(
                                   'Logout',

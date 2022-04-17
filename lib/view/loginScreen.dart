@@ -248,7 +248,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: primaryColor),
                               child: Center(
                                 child: isLoading
-                                    ? const ButtonLoadingAnimation(loadingColor: Color(0xffB6E2D3))
+                                    ? const CustomLoadingAnimation(loadingColor: Color(0xffB6E2D3))
                                     : Text(
                                         'Login',
                                         style: headerTS.copyWith(

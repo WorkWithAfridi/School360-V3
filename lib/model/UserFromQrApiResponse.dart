@@ -1,15 +1,15 @@
 /// status : "success"
 /// student_info : {"id":"3","name":"Ashek Mahmud","name_bangla":"Ashek Mahmud","student_code":"211003","date_of_birth":"06-23-1998","gender":"M","father_name":"Abc Parvez","mother_name":"Mrs. Shahina","guardian_mobile":"01711040530"}
 
-class DecodedUserFromQrApiResponse {
-  DecodedUserFromQrApiResponse({
+class UserFromQrApiResponse {
+  UserFromQrApiResponse({
     String? status,
     Student_info? studentInfo,}){
     _status = status;
     _studentInfo = studentInfo;
   }
 
-  DecodedUserFromQrApiResponse.fromJson(dynamic json) {
+  UserFromQrApiResponse.fromJson(dynamic json) {
     _status = json['status'];
     _studentInfo = json['student_info'] != null ? Student_info.fromJson(json['student_info']) : null;
   }
