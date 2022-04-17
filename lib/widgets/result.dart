@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school360/controller/resultController.dart';
 
 import '../constants/colors.dart';
 import '../constants/dimentions.dart';
@@ -7,7 +8,10 @@ import '../constants/textStyle.dart';
 import '../functions/randomColor.dart';
 
 class GetResult extends StatelessWidget {
-  const GetResult({Key? key}) : super(key: key);
+  int index;
+  GetResult({Key? key, required this.index}) : super(key: key);
+
+  ResultController resultController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,9 @@ class GetResult extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Summer",
+                      resultController
+                          .dataModelForResult!.resultInfo![index].name
+                          .toString(),
                       style: headerTS.copyWith(color: getRandomColor()),
                     ),
                   ],
@@ -66,7 +72,9 @@ class GetResult extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "A",
+                          resultController.dataModelForResult!
+                              .resultInfo![index].cAlphaGpaWithOptional
+                              .toString(),
                         ),
                       ),
                     ),
@@ -92,7 +100,9 @@ class GetResult extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "4.3",
+                          resultController.dataModelForResult!
+                              .resultInfo![index].gpaWithOptional
+                              .toString(),
                         ),
                       ),
                     ),
@@ -118,7 +128,10 @@ class GetResult extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "223.22",
+                          resultController.dataModelForResult!
+                              .resultInfo![index].totalObtainMark
+                              .toString(),
+                          style: defaultTS,
                         ),
                       ),
                     ),
@@ -144,7 +157,10 @@ class GetResult extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "2",
+                          resultController.dataModelForResult!
+                              .resultInfo![index].classPosition
+                              .toString(),
+                          style: defaultTS,
                         ),
                       ),
                     ),
@@ -170,7 +186,9 @@ class GetResult extends StatelessWidget {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "23",
+                          resultController.dataModelForResult!
+                              .resultInfo![index].totalCredit
+                              .toString(),
                           style: defaultTS,
                         ),
                       ),
