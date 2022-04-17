@@ -9,5 +9,6 @@ class MainframBindings extends Bindings {
     Get.lazyPut(() => LocationController());
     Get.lazyPut(() => NoticeController());
     Get.lazyPut(() => ResultController());
+    Get.lazyPut(() => ResultController());
   }
 }

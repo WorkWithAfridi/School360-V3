@@ -20,7 +20,8 @@ class AttendanceScreen extends StatefulWidget {
 
 class _AttendanceScreenState extends State<AttendanceScreen> {
   String selectedDate = '';
-  bool isLoading = false;
+  bool isLoading = true;
+  bool isButtonLoading = false;
   bool showContent = false;
 
   @override
@@ -36,16 +37,12 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           children: [
             getAppBar(),
             SizedBox(
-              height: 15,
+              height: 20,
             ),
             Container(
-              height: 300,
+              padding: const EdgeInsets.only(right: 15),
+              alignment: Alignment.center,
               margin: getGlobalPadding(),
-              padding: EdgeInsets.only(
-                top: 25,
-                left: 10,
-                right: 10,
-              ),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
@@ -54,41 +51,25 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                   width: 1,
                 ),
               ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SfDateRangePicker(
-                    allowViewNavigation: true,
-                    selectionMode: DateRangePickerSelectionMode.single,
-                    selectionColor: primaryColor,
-                    toggleDaySelection: false,
-                    onSelectionChanged: (x) async {
-                      selectedDate = x.value.toString().substring(0, 10);
-                    },
-                  ),
-                  isLoading
-                      ? Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Container(
-                              height: 300,
-                              width: Get.width,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(.7),
-                              ),
-                            ),
-                            Container(
-                              height: 100,
-                              child: GetLoadingAnimation(),
-                            ),
-                          ],
-                        )
-                      : Container(),
-                ],
+              // color: Colors.red,
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                    dropdownColor: Colors.white,
+                    style: defaultTS,
+                    isExpanded: false,
+                    elevation: 4,
+                    value: "Select a class",
+                    items: [
+                      "Select a class",
+                      "Class 1",
+                      "Class 2",
+                      "Class 3",
+                    ].map(buildMonthMenuItem).toList(),
+                    onChanged: (value) {}),
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 20,
             ),
             Padding(
               padding: getGlobalPadding(),
@@ -130,19 +111,16 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               ),
             ),
             SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
+              height: 20,
             ),
             InkWell(
               onTap: () async {
                 setState(() {
-                  isLoading = true;
+                  isButtonLoading = true;
                 });
                 await Future.delayed(Duration(seconds: 2));
                 setState(() {
-                  isLoading = false;
+                  isButtonLoading = false;
                   showContent = true;
                 });
               },
@@ -305,7 +283,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Pick a Date",
+            "Pick a Month",
             style: headerTS,
           ),
           // InkWell(
@@ -320,5 +298,4 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
       ),
     );
   }
-
 }

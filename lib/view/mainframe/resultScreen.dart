@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school360/controller/appdataController.dart';
 import 'package:school360/controller/resultController.dart';
 import 'package:school360/functions/randomColor.dart';
 import 'package:school360/widgets/buttonLoadingAnimation.dart';
+import 'package:school360/widgets/loadingAnimation.dart';
 import 'package:school360/widgets/result.dart';
 
 import '../../constants/colors.dart';
@@ -17,10 +19,10 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
-  bool isLoading = true;
   bool isButtonLoading = false;
   bool showResultTranscript = false;
   ResultController resultController = Get.find();
+  AppdataController appdataController = Get.find();
 
   @override
   void initState() {
@@ -33,7 +35,7 @@ class _ResultScreenState extends State<ResultScreen> {
     await resultController.getYearDropDownList();
     await Future.delayed(Duration(seconds: 2));
     setState(() {
-      isLoading = false;
+      appdataController.isResultScreenLoading = false;
     });
   }
 
@@ -42,8 +44,8 @@ class _ResultScreenState extends State<ResultScreen> {
     return Container(
       height: Get.height,
       width: Get.width,
-      child: isLoading
-          ? Center(child: CustomLoadingAnimation(loadingColor: primaryColor))
+      child: appdataController.isResultScreenLoading
+          ? Center(child: GetLoadingAnimation())
           : SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               child: Column(
@@ -129,7 +131,8 @@ class _ResultScreenState extends State<ResultScreen> {
                       ),
                       child: Center(
                         child: isButtonLoading
-                            ? CustomLoadingAnimation(loadingColor: secondaryColor)
+                            ? CustomLoadingAnimation(
+                                loadingColor: secondaryColor)
                             : Text(
                                 'Load',
                                 style: headerTS.copyWith(
@@ -182,15 +185,15 @@ class _ResultScreenState extends State<ResultScreen> {
                                     },
                                   )
                                 : Padding(
-                                  padding: getGlobalPadding(),
-                                  child: Text(
+                                    padding: getGlobalPadding(),
+                                    child: Text(
                                       "Stand by for updates...",
                                       style: defaultTS.copyWith(
                                         color: secondaryColor.withOpacity(.6),
                                         fontSize: 11,
                                       ),
                                     ),
-                                ),
+                                  ),
                           ],
                         )
                       : Container(),

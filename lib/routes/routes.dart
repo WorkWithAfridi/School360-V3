@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:school360/bindings/appdataBinding.dart';
 import 'package:school360/bindings/authenticationBindings.dart';
 import 'package:school360/bindings/mainframBingings.dart';
 import 'package:school360/bindings/userBindings.dart';
@@ -24,7 +25,8 @@ class Routes {
       name: getSplashScreenRoute,
       bindings: [
         AuthenticationBindings(),
-        UserBinding()
+        UserBinding(),
+        AppdataBinding(),
       ],
       page: () => SplashScreen(),
     ),

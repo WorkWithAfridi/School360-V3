@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:school360/controller/appdataController.dart';
 import 'package:school360/controller/locationController.dart';
 import 'package:school360/controller/noticeController.dart';
 import 'package:school360/controller/userController.dart';
 import 'package:school360/widgets/announcement.dart';
 import 'package:school360/widgets/buttonLoadingAnimation.dart';
 import 'package:school360/widgets/classPerformance.dart';
+import 'package:school360/widgets/loadingAnimation.dart';
 import 'package:school360/widgets/pastpayment.dart';
 
 import '../../constants/colors.dart';
@@ -27,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late NoticeController noticeController;
   late UserController userController;
   String selectedFilter = "All Topic";
-  bool isLoading = true;
 
   Container getAppBar() {
     return Container(
@@ -584,11 +585,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  late AppdataController appdataController;
+
   @override
   void initState() {
     locationController = Get.find();
     noticeController = Get.find();
     userController = Get.find();
+    appdataController = Get.find();
     super.initState();
     getData();
   }
@@ -599,18 +603,16 @@ class _HomeScreenState extends State<HomeScreen> {
     if (noticeFetchSuccess) {
       await Future.delayed(Duration(seconds: 2));
       setState(() {
-        isLoading = false;
+        appdataController.isHomeScreenLoading = false;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
+    return appdataController.isHomeScreenLoading
         ? Center(
-            child: CustomLoadingAnimation(
-              loadingColor: primaryColor,
-            ),
+            child: GetLoadingAnimation(),
           )
         : SizedBox(
             height: Get.height,
