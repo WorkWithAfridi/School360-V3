@@ -131,11 +131,7 @@ class _MainframeState extends State<Mainframe> {
         onIndexChanged: (pageIndex) {
           setState(() {
             selectedPageIndex = pageIndex;
-            pageController.animateToPage(
-              pageIndex,
-              duration: Duration(milliseconds: 1000),
-              curve: Curves.linearToEaseOut,
-            );
+            pageController.jumpToPage(pageIndex);
           });
         },
         animationDuration: Duration(milliseconds: 1000),

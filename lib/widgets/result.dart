@@ -13,6 +13,8 @@ class GetResult extends StatelessWidget {
 
   ResultController resultController = Get.find();
 
+  final Color titleColor = secondaryColor;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,7 +47,7 @@ class GetResult extends StatelessWidget {
                       resultController
                           .dataModelForResult!.resultInfo![index].name
                           .toString(),
-                      style: headerTS.copyWith(color: getRandomColor()),
+                      style: headerTS.copyWith(color: titleColor),
                     ),
                   ],
                 ),

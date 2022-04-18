@@ -8,8 +8,8 @@ class GetLoadingAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.width / 2,
-      width: Get.width,
+      height: 80,
+      width: 150,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

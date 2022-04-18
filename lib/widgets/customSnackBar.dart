@@ -18,10 +18,11 @@ showSnackbar({required String title, required String message}) {
       message,
       style: defaultTS,
     ),
-    snackPosition: SnackPosition.TOP,
+    snackPosition: SnackPosition.BOTTOM,
     borderWidth: .5,
     borderColor: secondaryColor,
-    margin: EdgeInsets.all(15),
+
+    margin: EdgeInsets.symmetric(horizontal: 15, vertical: 80),
     duration: Duration(seconds: 3),
     borderRadius: 5
   );

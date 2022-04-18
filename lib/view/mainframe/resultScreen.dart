@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school360/controller/appdataController.dart';
 import 'package:school360/controller/resultController.dart';
-import 'package:school360/functions/randomColor.dart';
 import 'package:school360/widgets/buttonLoadingAnimation.dart';
+import 'package:school360/widgets/customSnackBar.dart';
 import 'package:school360/widgets/loadingAnimation.dart';
 import 'package:school360/widgets/result.dart';
 
@@ -20,7 +20,6 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
   bool isButtonLoading = false;
-  bool showResultTranscript = false;
   ResultController resultController = Get.find();
   AppdataController appdataController = Get.find();
 
@@ -32,15 +31,18 @@ class _ResultScreenState extends State<ResultScreen> {
   }
 
   getData() async {
-    await resultController.getYearDropDownList();
-    await Future.delayed(Duration(seconds: 2));
-    setState(() {
-      appdataController.isResultScreenLoading = false;
-    });
+    if (!appdataController.showResultTranscript) {
+      await resultController.getYearDropDownList();
+      await Future.delayed(Duration(seconds: 2));
+      setState(() {
+        appdataController.isResultScreenLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(appdataController.showResultTranscript);
     return Container(
       height: Get.height,
       width: Get.width,
@@ -67,7 +69,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     height: 10,
                   ),
                   Container(
-                    padding: const EdgeInsets.only(right: 15),
+                    padding: const EdgeInsets.only(right: 32, left: 25),
                     alignment: Alignment.center,
                     margin: getGlobalPadding(),
                     decoration: BoxDecoration(
@@ -85,6 +87,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           style: defaultTS,
                           isExpanded: false,
                           elevation: 4,
+                          alignment: Alignment.center,
                           value: resultController.selectedYear,
                           items: resultController.years
                               .map(buildMonthMenuItem)
@@ -93,15 +96,11 @@ class _ResultScreenState extends State<ResultScreen> {
                             setState(() {
                               resultController.selectedYear = value as String;
                             });
-                            print(value.toString());
                           }),
                     ),
                   ),
                   SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   InkWell(
                     onTap: () async {
@@ -113,8 +112,12 @@ class _ResultScreenState extends State<ResultScreen> {
                         await Future.delayed(Duration(seconds: 2));
                         setState(() {
                           isButtonLoading = false;
-                          showResultTranscript = true;
+                          appdataController.showResultTranscript = true;
                         });
+                      } else {
+                        showSnackbar(
+                            title: "Error",
+                            message: "Please select a valid year");
                       }
                     },
                     child: Container(
@@ -132,7 +135,8 @@ class _ResultScreenState extends State<ResultScreen> {
                       child: Center(
                         child: isButtonLoading
                             ? CustomLoadingAnimation(
-                                loadingColor: secondaryColor)
+                                loadingColor: scaffoldBackgroundColor,
+                              )
                             : Text(
                                 'Load',
                                 style: headerTS.copyWith(
@@ -147,7 +151,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   SizedBox(
                     height: 15,
                   ),
-                  showResultTranscript
+                  appdataController.showResultTranscript
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,7 +200,7 @@ class _ResultScreenState extends State<ResultScreen> {
                                   ),
                           ],
                         )
-                      : Container(),
+                      : SizedBox.shrink(),
                 ],
               ),
             ),
